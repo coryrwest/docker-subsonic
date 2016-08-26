@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Create a new user account with UID/GID at least 10000.
 # This makes it easier to keep host and docker accounts apart.
-RUN useradd --home /var/subsonic -M subsonic -K UID_MIN=10000 -K GID_MIN=10000 && \
+RUN groupadd -g 1001 subsonic && useradd --home /var/subsonic -M subsonic -u 1001 -g 1001 && \
     mkdir -p /var/subsonic && chown subsonic /var/subsonic && chmod 0770 /var/subsonic
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
